@@ -48,12 +48,14 @@ def create_connections(tx,ratings):
         return count(*) as create_rated
         ''', data= part.to_dict('records'))
         i = i+1
-    print("listo")
 
 #ejecutar los scripts
 with GraphDatabase.driver(URI, auth=AUTH) as driver:
     with driver.session() as session:
         session.execute_write(create_users,users)
+        print("list01")
         session.execute_write(create_movies,movies)
+        print("list02")
         session.execute_write(create_connections,ratings)
+        print("listo03")
         #session.execute_read(get_similar_movies,"Toy Story")
