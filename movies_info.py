@@ -14,7 +14,7 @@ def get_similar_movies(tx, movie_name):
       AND m2.Title<>$data
       AND r1.Rating>3 AND r2.Rating>3
       AND m1.Genres = m2.Genres
-    RETURN m2.Title as common_users
+    RETURN DISTINCT m2.Title as common_users
     ORDER BY common_users DESC
     LIMIT 6''', data=movie_name )
     values = [record.values() for record in result]
@@ -43,7 +43,7 @@ def get_recomendations_by_userid(tx,userid):
 
 def get_movies_by_useid( userid):
     return driver.session().execute_read(get_recomendations_by_userid, userid)
-get_movies_by_useid(546)
+get_movies_by_useid(549)
 
 
 
